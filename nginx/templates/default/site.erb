@@ -6,6 +6,12 @@ server {
   location / {
     root   <%= @application[:absolute_document_root] %>;
     index  index.html index.htm index.php;
+    <% if @application[:force_ssl_on_elb] %>
+      if ($http_x_forwarded_proto != "https") {
+        #rewrite ^(.*)$ https://$server_name$1 permanent;
+	rewrite ^(.*)$ https://$host$1 redirect;
+      }
+    <% end %>
   }
   
   # Block all svn access
