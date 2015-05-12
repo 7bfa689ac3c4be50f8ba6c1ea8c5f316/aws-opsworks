@@ -4,5 +4,5 @@
 # Author::
 #
 
-node.default[:nginx][:force_ssl_on_elb] = true
+node.default["nginx"]["force_ssl_on_elb"] = true
 include_recipe "nginx"
