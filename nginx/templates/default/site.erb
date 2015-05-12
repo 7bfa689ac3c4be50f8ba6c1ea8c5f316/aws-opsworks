@@ -6,6 +6,7 @@ server {
   location / {
     root   <%= @application[:absolute_document_root] %>;
     index  index.html index.htm index.php;
+    # node=<%= node[:nginx][:force_ssl_on_elb] %>
     <% if node[:nginx][:force_ssl_on_elb] %>
       if ($http_x_forwarded_proto != "https") {
         #rewrite ^(.*)$ https://$server_name$1 permanent;
